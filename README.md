@@ -22,8 +22,6 @@
 
  1. **Run the inference locally**
 
-Deploy your custom model:
-
 * Using Edge Impulse ready-to-go firmware
 * Using Simplicity Studio 5 to add you business logic
 
