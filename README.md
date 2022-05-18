@@ -2,7 +2,6 @@
 
 * **Objectives:** Build a keyword recognition application from scratch by collecting data from the embedded sensors, training and validating your machine learning pipeline using Edge Impulse Studio, and, deploying the custom model back to your device.
 * **Duration:** ~90 min
-* **Difficulty:** Intermediate
 
 ## Workshop Agenda
 
@@ -15,15 +14,18 @@
 
 3. **Build your machine learning pipeline**
 
- * Collect data
- * Create an Impulse
- * Preprocess your data
- * Train your machine learning model using Neural Networks
- * Validate your model
+* Collect data
+* Create an Impulse
+* Preprocess your data
+* Train your machine learning model using Neural Networks
+* Validate your model
 
  1. **Run the inference locally**
 
- * Deploy your model
+Deploy your custom model:
+
+* Using Edge Impulse ready-to-go firmware
+* Using Simplicity Studio 5 to add you business logic
 
 # Hardware overview
 
@@ -103,7 +105,15 @@ That's all! Your device is now connected to Edge Impulse. To verify this, go to 
 
 # Build your machine learning pipeline
 
+If you do not have an Edge Impulse account yet, start by creating an account on Edge Impulse Studio and create a project.
+
+On this new project, select the `SiLabs EFR32MG24` board so the latency and performance estimations will calculated for your microcontroller:
+
 ![studio dashboard](assets/studio-dashboard.png)
+
+## Collect data from the device
+
+To start collecting some data, go to the Data acquisition view and click on the Connect using WebUSB button on the upper right corner:
 
 ![studio webUSB](assets/studio-webusb.png)
 
