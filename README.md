@@ -38,9 +38,9 @@ The Edge Impulse firmware for this development board is open source and hosted o
 ## Install dependencies
 
 To set this device up with Edge Impulse, you will need to install the following software:
-
+1. [Simplicity Studio 5](https://www.silabs.com/developers/simplicity-studio)
 1. [Simplicity Commander](https://community.silabs.com/s/article/simplicity-commander). A command line program we will use to flash firmware images onto the target.
-2. The [Edge Impulse CLI](https://docs.edgeimpulse.com/docs/edge-impulse-cli/cli-installation) which will enable you to connect your xG24 Dev Kit directly to Edge Impulse Studio, so that you can collect raw data and trigger in-system inferences.
+1. The [Edge Impulse CLI](https://docs.edgeimpulse.com/docs/edge-impulse-cli/cli-installation) which will enable you to connect your xG24 Dev Kit directly to Edge Impulse Studio, so that you can collect raw data and trigger in-system inferences.
 
 > Problems installing the CLI?
 > 
@@ -102,3 +102,9 @@ That's all! Your device is now connected to Edge Impulse. To verify this, go to 
 ![Device connected to Edge Impulse.](assets/xg24-dk-device-connected.png)
 
 # Build your machine learning pipeline
+
+![studio dashboard](assets/studio-dashboard.png)
+
+![studio webUSB](assets/studio-webusb.png)
+
+![studio sensors](assets/studio-sensors.png)
