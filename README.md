@@ -20,7 +20,7 @@
 * Train your machine learning model using Neural Networks
 * Validate your model
 
- 1. **Run the inference locally**
+ 4. **Run the inference on the xG24 Dev Kit**
 
 * Using Edge Impulse ready-to-go firmware
 * Using Simplicity Studio 5 to add you business logic
@@ -111,8 +111,68 @@ On this new project, select the `SiLabs EFR32MG24` board so the latency and perf
 
 ## Collect data from the device
 
+> If you are having any troubles while collecting data on your Edge Impulse project, the project we are building together is public. You can clone it on your Edge Impulse account and get started from there: [https://studio.edgeimpulse.com/public/106465/latest](https://studio.edgeimpulse.com/public/106465/latest)
+
 To start collecting some data, go to the Data acquisition view and click on the Connect using WebUSB button on the upper right corner:
 
 ![studio webUSB](assets/studio-webusb.png)
 
 ![studio sensors](assets/studio-sensors.png)
+
+# Run the inference on the xG24 Dev Kit
+
+## Using Simplicity Studio v5
+
+Install [Simplicity Studio v5](https://www.silabs.com/developers/simplicity-studio) and [Gecko SDK v4.0.2](https://github.com/SiliconLabs/gecko_sdk)
+
+Clone this repository: [https://github.com/edgeimpulse/firmware-silabs-xg24](https://github.com/edgeimpulse/firmware-silabs-xg24)
+
+In your Edge Impulse Studio project, go to the **Deployment** page, select the **Simplicity Studio Component** and click on **Build** at the bottom of the page:
+
+![Download Simplicity Studio Component](assets/studio-deployment.png)
+
+Unzip the archive and copy all the file present in the downloaded archive to the `ei-model` folder from the github repository.
+
+In the Simplicity Studio, choose `File -> Import`
+
+![Project import](assets/import1.png)
+
+Browse to the directory with cloned repository and select `firmware-xg24` project
+
+![Project import](assets/import2.png)
+
+On the next step, you will see error that the device part of the build configuration cannot be resolved, ingore it and go to next step
+
+![Build Configurations of the Project](assets/import3.png)
+
+In the `Boards` section, select (type in) `BRD2601B` and make sure to select Gecko SDK 4.0.2
+
+![Reconstruct Build Configurations](assets/import4.png)
+
+Choose a project name in your workspace and finish
+
+![Project Configuration](assets/import5.png)
+
+We have to make a small tweak. In the `Project Explorer` panel, right click on the `ei-model` directory and choose `Delete`
+
+![Project Explorer](assets/import6.png)
+
+Confirm that only workspace link will be removed, the target will remain unchanged
+
+![Delete Resources](assets/import7.png)
+
+Now, double click on the `firmware-xg24.slcp` file to open project configuration
+
+![Project Explorer](assets/import8.png)
+
+In the new window click `Force Regeneration`
+
+![Project Configuration](assets/import9.png)
+
+Build the project
+
+![Project import](assets/import10.png)
+
+## Flashing
+
+
