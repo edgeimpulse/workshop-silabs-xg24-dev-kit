@@ -17,10 +17,10 @@
 * Collect data
 * Create an Impulse
 * Preprocess your data
-* Train your machine learning model using Neural Networks
+* Train your machine learning model
 * Validate your model
 
- 4. **Run the inference on the xG24 Dev Kit**
+ 1. **Run the inference on the xG24 Dev Kit**
 
 * Using Edge Impulse ready-to-go firmware
 * Using Simplicity Studio 5 to add you business logic
@@ -113,13 +113,83 @@ On this new project, select the `SiLabs EFR32MG24` board so the latency and perf
 
 > If you are having any troubles while collecting data on your Edge Impulse project, the project we are building together is public. You can clone it on your Edge Impulse account and get started from there: [https://studio.edgeimpulse.com/public/106465/latest](https://studio.edgeimpulse.com/public/106465/latest)
 
-To start collecting some data, go to the Data acquisition view and click on the Connect using WebUSB button on the upper right corner:
+To start collecting some data, go to the Data acquisition view and click on the **Connect using WebUSB** button on the upper right corner:
 
 ![studio webUSB](assets/studio-webusb.png)
 
+And select **Microphone** from the sensor list:
+
 ![studio sensors](assets/studio-sensors.png)
 
+Set your label and click on **Start sampling**.
+
+Once you long sample (20s) has been collected, you can extract the keywords by clicking on **⋮** and selecting **Split samples**:
+
+![Split sample option](assets/studio-split-sample.png)
+
+![Split sample](assets/studio-split-sample-2.png).
+
+This will create 1 second-long samples containing your keyword.
+
+**Repeat this step until you have around 2/3 minutes of data per class**
+
+## Create an Impulse
+
+After collecting data for your project, you can now create your Impulse. A complete Impulse will consist of 3 main building blocks: input block, processing block and a learning block.
+
+**Here you will define your own machine learning pipeline.**
+
+In the video tutorial, we will test two different pipelines to see which provides the best accuracy.
+
+Below is the one with the best accuracy but is also bigger in size, if you want to integrate your impulse with an application that uses a lot of resources on the SiLabs xG24, you might want to use a **NN Classifier** instead of the **Transfer Learning (Keyword Spotting)** learning block.
+
+![Create an impulse](assets/studio-create-impulse.png)
+
+Click on **Save** and navigate to the **MFE** tab.
+
+## Preprocess your data
+
+Extracting meaningful features from your data is crucial to building small and reliable machine learning models, and in Edge Impulse this is done through processing blocks. The Audio MFE processing block extracts time and frequency features from a signal. These features will then be used by the learning block to train your model.
+
+If you're interested in learning more about the **MFE pre-processing block**, please have a look at our documentation website: [Audio MFE](https://docs.edgeimpulse.com/docs/edge-impulse-studio/processing-blocks/audio-mfe).
+
+Leave the default parameters and click on **Save parameters**.
+
+You will arrive on the next upper tab and click on **Generate the features**.
+
+Afterwards you're presented with one of the most useful features in Edge Impulse: the feature explorer. This is a representation showing your complete dataset, with each data-item color-coded to its respective label. You can zoom in to every item, find anomalies (an item that's in a wrong cluster), and click on items to listen to the sample. This is a great way to check whether your dataset contains wrong items, and to validate whether your dataset is suitable for ML.
+
+## Train your machine learning model
+
+The basic idea behind this learning block is that it will take some input data, and output a probability score that indicates how likely it is that the input data belongs to a particular class.
+
+Navigate to the next tab **Transfer Learning (Keyword Spotting)**. Leave the default parameters and click on **Train**:
+
+![Train your NN network](assets/studio-train.png)
+
+## Validate your model
+
+You can then navigate to the **Model Testing** tab to validate the accuracy of your model on data that has been unseen to the model. Make sure to put some data in your **Test dataset** (upper tab in **Data Acquisition** view).
+
+Click on **Classify all**:
+
+![Model testing](assets/studio-model-testing.png)
+
+To view a specific data sample, click on the "⋮" and **Show classification**.
+
+Once you are satisfied with your accuracy, go to the next section. You may want to collect more data and iterate over your parameters to improve the accuracy. Keep in mind that a ML project gets better over time.
+
 # Run the inference on the xG24 Dev Kit
+
+## Using Edge Impulse ready-to-go firmware
+
+The download Edge Impulse ready-to-go firmware, go to the **Deployment** page and select **SiLabs xG24 Dev Kit**:
+
+![download Edge Impulse ready-to-go firmware](assets/studio-deployment-firmware.png)
+
+Click on **Build**.
+
+Flash the firmware as you did in [Load the base firmware image with Simplicity Commander](#3-load-the-base-firmware-image-with-simplicity-commander).
 
 ## Using Simplicity Studio v5
 
@@ -175,4 +245,49 @@ Build the project
 
 ## Flashing
 
+Connect your board to your computer.
 
+To flash your program, right-click on your project and select **Run as** -> **1 Silicon Labs ARM program**
+
+Wait until the program has been flashed and open a Serial console (note that you can use `edge-impulse-run-impulse --raw`) and write the following AT command:
+
+```
+AT+RUNIMPULSE
+```
+
+Hit enter and the program will run the inference. Say the words you want to classify and observe the results.
+
+```
+edge-impulse-run-impulse --raw
+Edge Impulse impulse runner v1.14.8
+? Which device do you want to connect to? /dev/tty.usbmodem0004402604161 (Silico
+n Labs)
+[SER] Connecting to /dev/tty.usbmodem0004402604161
+[SER] Connected to /dev/tty.usbmodem0004402604161
+AT+RUNIMPULSE
+AT+RUNIMPULSE
+Inferencing settings:
+	Interval: 0.0625ms.
+	Frame size: 16000
+	Sample length: 1000.00 ms.	No. of classes: 4
+Starting inferencing, press 'b' to break
+Starting inferencing in 2 seconds...
+Predictions (DSP: 219 ms., Classification: 53 ms., Anomaly: 0 ms.): 
+    _noise: 	0.746094
+    down: 	0.003906
+    stop: 	0.054688
+    up: 	0.195312
+Starting inferencing in 2 seconds...
+Predictions (DSP: 220 ms., Classification: 51 ms., Anomaly: 0 ms.): 
+    _noise: 	0.746094
+    down: 	0.003906
+    stop: 	0.054688
+    up: 	0.195312
+Starting inferencing in 2 seconds...
+Predictions (DSP: 220 ms., Classification: 52 ms., Anomaly: 0 ms.): 
+    _noise: 	0.011719
+    down: 	0.000000
+    stop: 	0.132812
+    up: 	0.855469
+Starting inferencing in 2 seconds...
+```
