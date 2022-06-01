@@ -298,8 +298,10 @@ If you encounter a timeout error using `edge-impulse-daemon` or when connecting 
 
 Under debug adapters right click on your dev kit and select “Launch Console”
 
+On Admin Tab, type “serial vcom” to see current baud setting:
+
 ![troubleshoot-1](https://user-images.githubusercontent.com/4725870/171451367-fb9c1014-885a-4a40-9b59-260db911688b.jpeg)
 
-On Admin Tab, type “serial vcom” to see current baud setting:
+On Admin Tab type serial vcom config speed 115200:
 
 ![troubleshooting-2](https://user-images.githubusercontent.com/4725870/171451417-1d91cf84-9365-4704-86fe-3b21fb2d2c96.jpeg)
