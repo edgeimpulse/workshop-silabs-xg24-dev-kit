@@ -98,6 +98,8 @@ That's all! Your device is now connected to Edge Impulse. To verify this, go to 
 
 ![Device connected to Edge Impulse.](assets/xg24-dk-device-connected.png)
 
+_See the [troubleshooting](#troubleshooting) section if you encounter any timeout issue._
+
 # Build your machine learning pipeline
 
 If you do not have an Edge Impulse account yet, start by creating an account on Edge Impulse Studio and create a project.
@@ -288,3 +290,16 @@ Predictions (DSP: 220 ms., Classification: 52 ms., Anomaly: 0 ms.):
     up: 	0.855469
 Starting inferencing in 2 seconds...
 ```
+
+
+## Troubleshooting
+
+If you encounter a timeout error using `edge-impulse-daemon` or when connecting using the WebUSB, Silicon Labs FAEs managed to fix the issue by changing the baud rate to 115200:
+
+Under debug adapters right click on your dev kit and select “Launch Console”
+
+![troubleshoot-1](https://user-images.githubusercontent.com/4725870/171451367-fb9c1014-885a-4a40-9b59-260db911688b.jpeg)
+
+On Admin Tab, type “serial vcom” to see current baud setting:
+
+![troubleshooting-2](https://user-images.githubusercontent.com/4725870/171451417-1d91cf84-9365-4704-86fe-3b21fb2d2c96.jpeg)
