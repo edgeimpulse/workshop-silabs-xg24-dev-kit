@@ -69,11 +69,8 @@ You can use [Simplicity Commander](https://community.silabs.com/s/article/simpli
 Then go to the "Flash" section on the left sidebar, and select the base firmware image file you downloaded in the first step above (i.e., the file named `firmware-xg24.hex`). You can now press the `Flash` button to load the base firmware image onto the xG24 Dev Kit.
 
 ![Flashing the xG24 Dev Kit base image](assets/xg24-dk-commander-flash.png)
-> Keep Simplicity Commander Handy
-> 
-> Simplicity Commander will be needed to upload any other project built on Edge 
-> Impulse, but the base firmware image only has to be loaded once.
 
+*Note that on some Operating Systems, you need to press the **reset** button on the board to load the firmware. To make sure the board is flashed with Edge Impulse default firmware, the board will then turn on and off the color leds blue/green/red/blue/green/red/blue/green for 2 seconds*
 
 ## Connecting to Edge Impulse
 
